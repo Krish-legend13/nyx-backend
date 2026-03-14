@@ -30,15 +30,13 @@ app.include_router(analytics.router, prefix="/api", tags=["Analytics"])
 app.include_router(leaderboard.router, prefix="/api", tags=["Leaderboard"])
 
 
-@app.get("/")
-def read_root():
-    return {
-        "message": "Nyx Nexus API online",
-        "docs": "/docs",
-    }
+import os
+from fastapi.staticfiles import StaticFiles
 
-
-# -----------------------------
+# Serve the frontend directory using StaticFiles
+frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 # Mr Nova AI (Ollama Integration)
 # -----------------------------
 @app.post("/nova-ai")

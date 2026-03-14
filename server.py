@@ -14,8 +14,9 @@ import os
 
 PORT = 8080
 
-# Change to the directory where the script is located
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+# Change to the frontend directory
+frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
+os.chdir(frontend_dir)
 
 Handler = http.server.SimpleHTTPRequestHandler
 
